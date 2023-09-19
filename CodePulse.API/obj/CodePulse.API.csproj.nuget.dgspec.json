@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "/Users/hosp/Desktop/web/backEnd/asp-net/Sameer/API/CodePulse.API/CodePulse.API/CodePulse.API.csproj": {}
+    "Z:\\Desktop\\web\\backEnd\\asp-net\\Sameer\\API\\CodePulse.API\\CodePulse.API\\CodePulse.API.csproj": {}
   },
   "projects": {
-    "/Users/hosp/Desktop/web/backEnd/asp-net/Sameer/API/CodePulse.API/CodePulse.API/CodePulse.API.csproj": {
+    "Z:\\Desktop\\web\\backEnd\\asp-net\\Sameer\\API\\CodePulse.API\\CodePulse.API\\CodePulse.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/hosp/Desktop/web/backEnd/asp-net/Sameer/API/CodePulse.API/CodePulse.API/CodePulse.API.csproj",
+        "projectUniqueName": "Z:\\Desktop\\web\\backEnd\\asp-net\\Sameer\\API\\CodePulse.API\\CodePulse.API\\CodePulse.API.csproj",
         "projectName": "CodePulse.API",
-        "projectPath": "/Users/hosp/Desktop/web/backEnd/asp-net/Sameer/API/CodePulse.API/CodePulse.API/CodePulse.API.csproj",
-        "packagesPath": "/Users/hosp/.nuget/packages/",
-        "outputPath": "/Users/hosp/Desktop/web/backEnd/asp-net/Sameer/API/CodePulse.API/CodePulse.API/obj/",
+        "projectPath": "Z:\\Desktop\\web\\backEnd\\asp-net\\Sameer\\API\\CodePulse.API\\CodePulse.API\\CodePulse.API.csproj",
+        "packagesPath": "C:\\Users\\WddkSaleh\\.nuget\\packages\\",
+        "outputPath": "Z:\\Desktop\\web\\backEnd\\asp-net\\Sameer\\API\\CodePulse.API\\CodePulse.API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/hosp/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\WddkSaleh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -39,6 +41,16 @@
           "targetAlias": "net7.0",
           "dependencies": {
             "Microsoft.AspNetCore.OpenApi": {
+              "target": "Package",
+              "version": "[7.0.11, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[7.0.11, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
               "version": "[7.0.11, )"
             },
@@ -66,7 +78,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.400/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }
