@@ -17,7 +17,9 @@ builder.Services.AddDbContext<ApplicationDbContext>((options) =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("CodePulseConnectionString"));
 });
 
+// register the repositories to the services collection to use them in the controllers.
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IBlogPostRepository, BlogPostRepository>();
 
 var app = builder.Build();
 
