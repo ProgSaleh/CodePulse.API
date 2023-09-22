@@ -13,9 +13,12 @@ namespace CodePulse.API.Controllers
     {
 
         private readonly IBlogPostRepository _blogPostRepository;
-        public BlogPostsController(IBlogPostRepository blogPostRepository)
+        private readonly ICategoryRepository _categoryRepository;
+
+        public BlogPostsController(IBlogPostRepository blogPostRepository, ICategoryRepository categoryRepository)
         {
             _blogPostRepository = blogPostRepository;
+            _categoryRepository = categoryRepository;
         }
 
         [HttpPost]
@@ -31,7 +34,17 @@ namespace CodePulse.API.Controllers
                 PublishedDate = req.PublishedDate,
                 Author = req.Author,
                 IsVisible = req.IsVisible,
+                Categories = new List<Category>(),
             };
+
+            foreach(var categoryGuid in req.Categories)
+            {
+                var existingCategory = await _categoryRepository.GetById(categoryGuid);
+                if (existingCategory is not null)
+                {
+                    blogPost.Categories.Add(existingCategory);
+                }
+            }
 
             blogPost = await _blogPostRepository.CreateAsync(blogPost);
 
@@ -46,6 +59,12 @@ namespace CodePulse.API.Controllers
                 PublishedDate = blogPost.PublishedDate,
                 Author = blogPost.Author,
                 IsVisible = blogPost.IsVisible,
+                Categories = blogPost.Categories.Select(cat => new CategoryDto
+                {
+                    Id = cat.Id,
+                    Name = cat.Name,
+                    UrlHandle = cat.UrlHandle,
+                }).ToList()
             };
 
             return Ok(response);
@@ -70,6 +89,12 @@ namespace CodePulse.API.Controllers
                     PublishedDate = post.PublishedDate,
                     Author = post.Author,
                     IsVisible = post.IsVisible,
+                    Categories = post.Categories.Select(cat => new CategoryDto
+                    {
+                        Id = cat.Id,
+                        Name = cat.Name,
+                        UrlHandle = cat.UrlHandle,
+                    }).ToList()
                 });
             }
 

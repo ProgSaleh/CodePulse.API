@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CodePulse.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230919203157_Init db")]
-    partial class Initdb
+    [Migration("20230922021604_Add Relationships")]
+    partial class AddRelationships
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,21 @@ namespace CodePulse.API.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("BlogPostCategory", b =>
+                {
+                    b.Property<Guid>("BlogPostsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CategoriesId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("BlogPostsId", "CategoriesId");
+
+                    b.HasIndex("CategoriesId");
+
+                    b.ToTable("BlogPostCategory");
+                });
 
             modelBuilder.Entity("CodePulse.API.Models.Domain.BlogPost", b =>
                 {
@@ -39,15 +54,11 @@ namespace CodePulse.API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("FeaturedImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsVisiable")
+                    b.Property<bool>("IsVisible")
                         .HasColumnType("bit");
 
                     b.Property<DateTime>("PublishedDate")
@@ -87,6 +98,21 @@ namespace CodePulse.API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("BlogPostCategory", b =>
+                {
+                    b.HasOne("CodePulse.API.Models.Domain.BlogPost", null)
+                        .WithMany()
+                        .HasForeignKey("BlogPostsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CodePulse.API.Models.Domain.Category", null)
+                        .WithMany()
+                        .HasForeignKey("CategoriesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
