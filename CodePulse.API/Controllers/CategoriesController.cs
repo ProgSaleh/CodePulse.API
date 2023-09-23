@@ -92,7 +92,7 @@ namespace CodePulse.API.Controllers
                 return NotFound();
             }
 
-            var response = new Category
+            var response = new CategoryDto
             {
                 Id = category.Id,
                 Name = category.Name,
