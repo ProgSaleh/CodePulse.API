@@ -17,7 +17,7 @@ namespace CodePulse.API.Controllers
 
         public BlogPostsController(IBlogPostRepository blogPostRepository, ICategoryRepository categoryRepository)
         {
-            this._blogPostRepository = blogPostRepository;
+            _blogPostRepository = blogPostRepository;
             _categoryRepository = categoryRepository;
         }
 
@@ -184,6 +184,32 @@ namespace CodePulse.API.Controllers
                     Name = cat.Name,
                     UrlHandle = cat.UrlHandle,
                 }).ToList(),
+            };
+
+            return Ok(response);
+        }
+
+        [HttpDelete]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> DeleteBlogPost([FromRoute] Guid id)
+        {
+            var deletedPost = await _blogPostRepository.DeleteAsync(id);
+            if (deletedPost is null)
+            {
+                return NotFound();
+            }
+
+            var response = new BlogPostDto
+            {
+                Id = deletedPost.Id,
+                Title = deletedPost.Title,
+                ShortDescription = deletedPost.ShortDescription,
+                Content = deletedPost.Content,
+                FeaturedImageUrl = deletedPost.FeaturedImageUrl,
+                UrlHandle = deletedPost.UrlHandle,
+                PublishedDate = deletedPost.PublishedDate,
+                Author = deletedPost.Author,
+                IsVisible = deletedPost.IsVisible
             };
 
             return Ok(response);
